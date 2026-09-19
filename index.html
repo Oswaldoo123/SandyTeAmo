@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Para Sandy ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+
+            font-family: Arial, sans-serif;
+            color: white;
+
+            background:
+                radial-gradient(circle at top, #3a1025, #120611 55%, #080308);
+        }
+
+        /* Corazones del fondo */
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 105, 150, 0.25);
+            font-size: 20px;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(110vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-20vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Contenedor */
+
+        .card {
+            position: relative;
+            width: min(90%, 500px);
+            padding: 55px 30px;
+
+            text-align: center;
+
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 28px;
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 25px 80px rgba(0,0,0,0.5);
+
+            animation: appear 1.5s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .big-heart {
+            font-size: 65px;
+            margin-bottom: 25px;
+
+            animation: beat 1.5s infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .question {
+            font-size: 25px;
+            line-height: 1.4;
+            margin-bottom: 35px;
+
+            color: #ffd9e5;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        #yes {
+            background: linear-gradient(135deg, #ff3d78, #ff76a5);
+            color: white;
+
+            box-shadow: 0 10px 30px rgba(255,61,120,.35);
+        }
+
+        #yes:hover {
+            transform: scale(1.08);
+        }
+
+        #no {
+            background: rgba(255,255,255,.1);
+            color: #ddd;
+        }
+
+        /* Pantalla final */
+
+        #final {
+            display: none;
+        }
+
+        #final h1 {
+            font-size: 45px;
+        }
+
+        #final p {
+            margin-top: 20px;
+            color: #ffd9e5;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        @media(max-width: 500px) {
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .question {
+                font-size: 21px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Corazones -->
+
+    <div class="heart" style="left:10%; animation-delay:0s;">♡</div>
+    <div class="heart" style="left:25%; animation-delay:2s;">♥</div>
+    <div class="heart" style="left:45%; animation-delay:4s;">♡</div>
+    <div class="heart" style="left:65%; animation-delay:1s;">♥</div>
+    <div class="heart" style="left:85%; animation-delay:3s;">♡</div>
+
+
+    <!-- Pregunta -->
+
+    <div class="card" id="questionCard">
+
+        <div class="big-heart">
+            ❤️
+        </div>
+
+        <h1>
+            Sandy
+        </h1>
+
+        <div class="question">
+            Tengo algo que preguntarte...
+            <br><br>
+
+            <strong>
+                ¿Quieres ser mi novia?
+            </strong>
+        </div>
+
+        <div class="buttons">
+
+            <button id="yes" onclick="yes()">
+                Sí ❤️
+            </button>
+
+            <button id="no">
+                No
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Respuesta -->
+
+    <div class="card" id="final">
+
+        <div class="big-heart">
+            💗
+        </div>
+
+        <h1>
+            Sabía que dirías que sí ❤️
+        </h1>
+
+        <p>
+            Entonces ahora sí...
+            <br>
+            oficialmente somos nosotros. Gracias por hacerme el hombre más feliz del mundo.🫶🏼💗
+            <br>
+            Te amo como no te imaginas.😍
+        </p>
+
+    </div>
+
+
+    <script>
+
+        const no = document.getElementById("no");
+
+        no.addEventListener("mouseover", moveNo);
+        no.addEventListener("touchstart", moveNo);
+
+        function moveNo() {
+
+            no.style.position = "fixed";
+
+            no.style.left =
+                Math.random() * 70 + 15 + "%";
+
+            no.style.top =
+                Math.random() * 70 + 15 + "%";
+        }
+
+
+        function yes() {
+
+            document.getElementById("questionCard").style.display = "none";
+
+            document.getElementById("final").style.display = "block";
+
+            createHearts();
+
+        }
+
+
+        function createHearts() {
+
+            for(let i = 0; i < 50; i++) {
+
+                setTimeout(() => {
+
+                    const heart =
+                        document.createElement("div");
+
+                    heart.className = "heart";
+
+                    heart.innerHTML = "❤️";
+
+                    heart.style.left =
+                        Math.random() * 100 + "%";
+
+                    heart.style.animationDuration =
+                        3 + Math.random() * 4 + "s";
+
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 7000);
+
+                }, i * 70);
+            }
+        }
+
+    </script>
+
+</body>
+</html>
